@@ -1,18 +1,18 @@
 #!/usr/bin/env groovy
 
 pipeline { 
+  
+      environment { 
+        REGISTRY_ADDRESS = "gcr.io/evident-theory-282613/prototype" 
+        REGISTRY_AUTH = credentials("gcp-cred") 
+        IMAGE = "gcr.io/evident-theory-282613/prototype"
+        VERSION = ":$BUILD_NUMBER"
+    }
    
     agent any
     
     options {
         timestamps()
-    }
-    
-   environment { 
-        REGISTRY_ADDRESS = "gcr.io/evident-theory-282613/prototype" 
-        REGISTRY_AUTH = credentials("gcp-cred") 
-        IMAGE = "gcr.io/evident-theory-282613/prototype"
-        VERSION = ":$BUILD_NUMBER"
     }
     
     stages { 
