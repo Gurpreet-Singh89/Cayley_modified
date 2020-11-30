@@ -24,9 +24,6 @@ pipeline {
         } 
         
         stage('Building and publishing our image') { 
-            when {
-              branch 'master'  
-            }
             steps { 
                 
                  sh """
