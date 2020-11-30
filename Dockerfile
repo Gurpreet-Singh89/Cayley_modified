@@ -1,4 +1,4 @@
-#FROM cayleygraph/cayley:v0.7.6 as cayley
+FROM cayleygraph/cayley:v0.7.6 as cayley
 
 # Any base image you want here
 FROM alpine
