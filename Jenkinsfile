@@ -1,39 +1,62 @@
+#!/usr/bin/env groovy
+
 pipeline { 
-    environment { 
-        registry = "gcr.io/evident-theory-282613/prototype" 
-        registryCredential = 'gcp-cred' 
-        dockerImage = '' 
+   
+    agent {
+        node{
+          label 'docker'  
+        }     
+    } 
+    
+    options {
+        timestamps()
     }
     
-    agent any 
+   environment { 
+        REGISTRY_ADDRESS = "gcr.io/evident-theory-282613/prototype" 
+        REGISTRY_AUTH = credentials("gcp-cred") 
+        IMAGE = "gcr.io/evident-theory-282613/prototype"
+        VERSION = ":$BUILD_NUMBER"
+    }
     
     stages { 
-        
+       
         stage('Cloning our Git') { 
             steps { 
                 git 'https://github.com/GurpreetSingh89/Cayley_modified.git' 
             }
         } 
         
-        stage('Building our image') { 
+        stage('Building and publishing our image') { 
+            when {
+              branch 'master'  
+            }
             steps { 
-                script { 
+                
+                 sh """
+                  docker.registry('http://gcr.io', ${REGISTRY_AUTH})
+                  docker build -t ${IMAGE} .
+                  docker tag ${IMAGE} ${IMAGE}:${VERSION}
+                  docker push ${IMAGE}:${VERSION}
+                """
+                
+             //   script { 
                     //sudo chmod 666 /var/run/docker.sock
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-                }
+               //     dockerImage = docker.build REGISTRY_ADDRESS + ":$BUILD_NUMBER" 
+               // }
             } 
         }
         
-        stage('Push your image') { 
-            steps { 
-                script { 
-                    docker.registry( 'http://gcr.io', registryCredential ) { 
-                        dockerImage.push() 
-                    }
-                } 
-            }
-        } 
-        
+        //stage('Push your image') { 
+            //steps { 
+               // script { 
+                    //docker.registry( 'http://gcr.io', REGISTRY_AUTH ) { 
+                        //dockerImage.push() 
+                    //}
+                //} 
+            //}
+       // } 
+              
         stage('Cleaning up') { 
             steps { 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
