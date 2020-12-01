@@ -11,10 +11,6 @@ pipeline {
 
     agent any
 
-    options {
-        timestamps()
-    }
-
     stages { 
 
         stage('Cloning our Git') { 
