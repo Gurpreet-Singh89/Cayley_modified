@@ -10,7 +10,7 @@ pipeline {
     stage('Building and publishing our image') {
       steps {
         sh """
-                          docker.registry('http://gcr.io', ${REGISTRY_AUTH})
+                          docker.registry('http://gcr.io , ${REGISTRY_AUTH}')
                           docker build -t ${IMAGE} .
                           docker tag ${IMAGE} ${IMAGE}:${VERSION}
                           docker push ${IMAGE}:${VERSION}
@@ -26,9 +26,9 @@ pipeline {
 
   }
   environment {
-    REGISTRY_ADDRESS = 'o/evident-theory-282613/prototypegcr.i'
+    REGISTRY_ADDRESS = 'gcr.io/evident-theory-282613/prototype'
     REGISTRY_AUTH = credentials('gcp-cred')
     IMAGE = 'gcr.io/evident-theory-282613/prototype'
-    VERSION = ":$BUILD_NUMBER"
+    VERSION = ':$BUILD_NUMBER'
   }
 }
