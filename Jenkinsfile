@@ -15,16 +15,19 @@ pipeline {
 
         stage('Cloning our Git') { 
             steps { 
+                when {
+                  branch 'master'  //only run these steps on the master branch
+            }
                 //  sh """
                 //git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
                 //git fetch --all
              // """
-                  git branch: 'master',
+                  //git branch: 'master',
                       //credentialsId: 'my_cred_id',
-                      url: 'https://github.com/GurpreetSingh89/Cayley_modified.git'
+                 //     url: 'https://github.com/GurpreetSingh89/Cayley_modified.git'
 
-                  sh "ls -lat"
-               // git 'https://github.com/GurpreetSingh89/Cayley_modified.git' 
+               //   sh "ls -lat"
+                git 'https://github.com/GurpreetSingh89/Cayley_modified.git' 
             }
         } 
 
