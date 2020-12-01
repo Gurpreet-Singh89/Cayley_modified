@@ -9,12 +9,12 @@ pipeline {
 
     stage('Building and publishing our image') {
       steps {
-        sh """
-                          docker.registry('http://gcr.io , ${REGISTRY_AUTH}')
+        sh '
+                          docker.registry('http://gcr.io' , ${REGISTRY_AUTH})
                           docker build -t ${IMAGE} .
                           docker tag ${IMAGE} ${IMAGE}:${VERSION}
                           docker push ${IMAGE}:${VERSION}
-                        """
+                        '
       }
     }
 
