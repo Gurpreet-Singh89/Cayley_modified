@@ -19,6 +19,10 @@ pipeline {
 
         stage('Cloning our Git') { 
             steps { 
+                  sh """
+                git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+                git fetch --all
+              """
                 git 'https://github.com/GurpreetSingh89/Cayley_modified.git' 
             }
         } 
