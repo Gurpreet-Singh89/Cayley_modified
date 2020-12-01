@@ -24,7 +24,7 @@ pipeline {
                       url: 'https://github.com/GurpreetSingh89/Cayley_modified.git'
 
                   sh "ls -lat"
-                git 'https://github.com/GurpreetSingh89/Cayley_modified.git' 
+               // git 'https://github.com/GurpreetSingh89/Cayley_modified.git' 
             }
         } 
 
