@@ -10,7 +10,7 @@ pipeline {
     stage('Building and publishing our image') {
       steps {
         sh """
-                          'docker.registry("https://gcr.io/evident-theory-282613" , ${REGISTRY_AUTH})'
+                          'docker.registry("https://gcr.io/evident-theory-282613/prototype" , ${REGISTRY_AUTH})'
                           'docker build -t ${IMAGE} .'
                           'docker tag ${IMAGE} ${IMAGE}:$BUILD_NUMBER'
                           'docker push ${IMAGE}:$BUILD_NUMBER'
