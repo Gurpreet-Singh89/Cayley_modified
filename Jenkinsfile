@@ -19,6 +19,11 @@ pipeline {
                 git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
                 git fetch --all
               """
+                  git branch: 'master',
+                      //credentialsId: 'my_cred_id',
+                      url: 'https://github.com/GurpreetSingh89/Cayley_modified.git'
+
+                  sh "ls -lat"
                 git 'https://github.com/GurpreetSingh89/Cayley_modified.git' 
             }
         } 
