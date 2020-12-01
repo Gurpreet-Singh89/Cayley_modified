@@ -11,9 +11,9 @@ pipeline {
       steps {
         sh "'"
                           docker.registry('http://gcr.io' , ${REGISTRY_AUTH})
-                          docker build -t ${IMAGE} .
-                          docker tag ${IMAGE} ${IMAGE}:$BUILD_NUMBER
-                          docker push ${IMAGE}:$BUILD_NUMBER
+                          docker build -t '${IMAGE} .'
+                          docker tag '${IMAGE} ${IMAGE}:$BUILD_NUMBER'
+                          docker push '${IMAGE}:$BUILD_NUMBER'
                         "'"
       }
     }
