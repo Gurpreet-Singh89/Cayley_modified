@@ -15,9 +15,6 @@ pipeline {
 
         stage('Cloning our Git') { 
             steps { 
-                when {
-                  branch 'master'  //only run these steps on the master branch
-            }
                 //  sh """
                 //git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
                 //git fetch --all
