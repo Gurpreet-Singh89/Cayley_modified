@@ -1,3 +1,4 @@
+currentBuild.displayName = "My-Builds-#"+currentBuild.number
 pipeline {
   agent any
   stages {
@@ -10,10 +11,10 @@ pipeline {
     stage('Building and publishing our image') {
       steps {
         sh """
-                          'docker.registry("https://gcr.io/evident-theory-282613/prototype" , ${REGISTRY_AUTH})'
-                          'docker build -t ${IMAGE} .'
-                          'docker tag ${IMAGE} ${IMAGE}:$BUILD_NUMBER'
-                          'docker push ${IMAGE}:$BUILD_NUMBER'
+                          docker.registry('https://gcr.io/evident-theory-282613/prototype' , ${REGISTRY_AUTH})
+                          docker build -t ${IMAGE} .
+                          docker tag ${IMAGE} ${IMAGE}:$BUILD_NUMBER
+                          docker push ${IMAGE}:$BUILD_NUMBER
                         """
       }
     }
