@@ -1,6 +1,6 @@
 {
     "store": {
       "backend": "mysql",
-      "address": "rconnuser:Matarpaneer!@tcp(localhost:3306)/cayley_rconn"
+      "address": "dATABASE ADDRESS"
     }
 }
